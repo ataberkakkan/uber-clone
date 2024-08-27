@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 import { useUser } from "@clerk/clerk-expo";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
@@ -123,11 +124,21 @@ export default function Page() {
 
   const { user } = useUser();
 
+  const router = useRouter();
+
   const [hasPermissions, setHasPermissions] = useState(false);
 
   const handleSignOut = () => {};
 
-  const handleDestination = () => {};
+  const handleDestination = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+
+    router.push("/(root)/find-ride");
+  };
 
   useEffect(() => {
     const requestLocation = async () => {
