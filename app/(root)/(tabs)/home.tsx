@@ -12,6 +12,7 @@ import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 
 import { icons, images } from "@/constants";
+import { Ride } from "@/types/type";
 
 export default function Page() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
@@ -21,7 +22,9 @@ export default function Page() {
 
   const router = useRouter();
 
-  const { data: recentRides, loading } = useFetch(`/(api)/ride/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(
+    `/(api)/ride/${user?.id}`
+  );
 
   const [hasPermissions, setHasPermissions] = useState(false);
 
